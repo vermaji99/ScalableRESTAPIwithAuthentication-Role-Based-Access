@@ -25,17 +25,26 @@ To see the role-based differences in the dashboard, please use the following see
 ---
 
 ## 🛠️ Features
+- **JWT Authentication**: Secure user sessions using JSON Web Tokens.
+- **Task CRUD APIs**: Full Create, Read, Update, and Delete operations for tasks.
+- **MongoDB Database**: Flexible schema design using Mongoose ODM.
+- **Swagger API Docs**: Interactive API documentation and testing interface.
+- **Docker Setup**: Containerized environment for consistent deployment.
 - **Modern UI**: Full Glassmorphism theme with responsive design.
-- **Authentication**: JWT-based login and registration with password hashing (bcrypt).
-- **Role-Based Access**: Strict separation between `Admin` and `User` roles at both API and UI levels.
-- **Task Management**: Full CRUD for tasks (Title, Description, Owner).
-- **User Management**: Admin-only ability to manage system users.
-- **Scalable Architecture**: Modular service-based structure with MongoDB/Mongoose.
-- **API Docs**: Fully documented via Swagger.
 
-## ⚙️ Setup & Installation
+## 📖 API Documentation
+Once the server is running, you can access the interactive Swagger UI at:
+[http://localhost:4002/api-docs](http://localhost:4002/api-docs)
 
-1. **Install Dependencies**:
+## ⚙️ Installation
+
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/vermaji99/ScalableRESTAPIwithAuthentication-Role-Based-Access.git
+   cd task-asap
+   ```
+
+2. **Install Dependencies**:
    ```bash
    # Root (Backend)
    npm install
@@ -46,20 +55,7 @@ To see the role-based differences in the dashboard, please use the following see
    cd ../..
    ```
 
-2. **Environment Configuration**:
-   Create a `.env` file in the root directory (see `.env.example`):
-   ```env
-   PORT=4002
-   MONGO_URI=mongodb://localhost:27017/taskmanager
-   JWT_ACCESS_SECRET=your_secret_key
-   ```
-
-3. **Seed Database** (Highly Recommended for Testing):
-   ```bash
-   npm run seed
-   ```
-
-4. **Run the Project**:
+3. **Run the Project**:
    ```bash
    # Start Backend (on port 4002)
    npm run dev
@@ -69,24 +65,40 @@ To see the role-based differences in the dashboard, please use the following see
    npm run dev
    ```
 
-## 🔗 Project Links
-- **Frontend UI**: [http://localhost:5173/](http://localhost:5173/)
-- **API Documentation**: [http://localhost:4002/api-docs](http://localhost:4002/api-docs)
+## 🔑 Environment Variables
 
-## � Scalability Design
+Create a `.env` file in the root directory:
+```env
+PORT=4002
+MONGO_URI=mongodb://localhost:27017/taskmanager
+JWT_ACCESS_SECRET=your_secret_key_at_least_32_chars
+```
 
-This backend follows a modular architecture that allows easy scalability and maintenance.
+## 🛣️ API Endpoints
 
-### Possible Improvements:
-- **Microservices**: The authentication service and task service can be separated into independent services.
-- **Caching**: Redis can be used to cache frequently accessed data to reduce DB load.
-- **Load Balancing**: Multiple API instances can run behind a load balancer (like Nginx) for horizontal scaling.
-- **Containerization**: Docker and Kubernetes can be used for consistent deployment and auto-scaling.
-- **Web3 Integration**: This architecture can be easily extended to support **crypto trading analytics** and blockchain interaction services.
+### Auth
+- `POST /api/v1/auth/register` - Register a new user
+- `POST /api/v1/auth/login` - Login and receive JWT
 
-## �📁 Folder Structure
+### Tasks
+- `GET /api/v1/tasks` - List tasks (Admin sees all, User sees own)
+- `POST /api/v1/tasks` - Create a new task
+- `PATCH /api/v1/tasks/:id` - Update a task
+- `DELETE /api/v1/tasks/:id` - Delete a task
+
+## 📐 Scalability Note
+
+This project can scale using:
+- **Load Balancers**: Distribute traffic across multiple API instances.
+- **Microservices architecture**: Separate Auth and Task services for independent scaling.
+- **Redis caching**: Cache frequently accessed data to improve performance.
+- **Docker containerization**: Simplify deployment and scaling using Kubernetes.
+- **Web3 Integration**: Extendable architecture to support crypto trading analytics services.
+
+## 📁 Folder Structure
 - `src/controllers`: Request handlers
 - `src/models`: Mongoose models and validation schemas
 - `src/services`: Core business logic
 - `apps/web`: React frontend with Glassmorphism UI
 - `src/utils/seed.js`: Database seeding script for easy evaluation
+- `logs/`: Application log files
