@@ -14,6 +14,8 @@ To see the role-based differences in the dashboard, please use the following see
   - Access to two columns: **System Tasks** (all tasks in the DB) and **System Users** (list of all users).
   - Ability to delete any task or any user from the system.
 
+![Admin Dashboard](admin_page.png)
+
 ### 2. Regular User Login (Personal Access)
 - **Email**: `user1@example.com`
 - **Password**: `password123`
@@ -21,6 +23,16 @@ To see the role-based differences in the dashboard, please use the following see
   - You will see the **User Dashboard**.
   - Simplified view showing only your own tasks.
   - No access to the user management list.
+
+![User Dashboard](userpage.png)
+
+---
+
+## 📸 Screenshots
+
+| Login Page | Register Page |
+|------------|---------------|
+| ![Login](login.png) | ![Register](register.png) |
 
 ---
 
