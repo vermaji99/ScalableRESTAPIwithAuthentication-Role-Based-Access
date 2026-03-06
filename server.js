@@ -33,9 +33,7 @@ const limiter = rateLimit({
 });
 app.use(limiter);
 
-if (config.SWAGGER_ENABLED) {
-  setupSwagger(app);
-}
+setupSwagger(app);
 
 app.use("/api/v1", routerV1);
 

@@ -17,7 +17,8 @@ const envSchema = z.object({
   SWAGGER_ENABLED: z
     .string()
     .optional()
-    .transform((v) => (v === undefined ? "true" : v))
+    .default("true")
+    .transform((v) => v === "true")
 });
 
 const parsed = envSchema.safeParse(process.env);
@@ -39,5 +40,5 @@ export const config = {
   BODY_LIMIT: env.BODY_LIMIT,
   RATE_LIMIT_WINDOW_MS: env.RATE_LIMIT_WINDOW_MS,
   RATE_LIMIT_MAX: env.RATE_LIMIT_MAX,
-  SWAGGER_ENABLED: env.SWAGGER_ENABLED === "true"
+  SWAGGER_ENABLED: env.SWAGGER_ENABLED
 };
