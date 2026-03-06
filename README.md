@@ -73,7 +73,18 @@ To see the role-based differences in the dashboard, please use the following see
 - **Frontend UI**: [http://localhost:5173/](http://localhost:5173/)
 - **API Documentation**: [http://localhost:4002/api-docs](http://localhost:4002/api-docs)
 
-## 📁 Folder Structure
+## � Scalability Design
+
+This backend follows a modular architecture that allows easy scalability and maintenance.
+
+### Possible Improvements:
+- **Microservices**: The authentication service and task service can be separated into independent services.
+- **Caching**: Redis can be used to cache frequently accessed data to reduce DB load.
+- **Load Balancing**: Multiple API instances can run behind a load balancer (like Nginx) for horizontal scaling.
+- **Containerization**: Docker and Kubernetes can be used for consistent deployment and auto-scaling.
+- **Web3 Integration**: This architecture can be easily extended to support **crypto trading analytics** and blockchain interaction services.
+
+## �📁 Folder Structure
 - `src/controllers`: Request handlers
 - `src/models`: Mongoose models and validation schemas
 - `src/services`: Core business logic
