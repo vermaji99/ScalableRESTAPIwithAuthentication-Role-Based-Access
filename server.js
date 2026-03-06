@@ -2,6 +2,9 @@ import express from "express";
 import helmet from "helmet";
 import cors from "cors";
 import morgan from "morgan";
+import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
 import rateLimit from "express-rate-limit";
 import { config } from "./src/config/env.js";
 import connectDB from "./src/config/db.js";
@@ -9,10 +12,18 @@ import { routerV1 } from "./src/routes/index.js";
 import { errorHandler, notFoundHandler } from "./src/middlewares/error.js";
 import { setupSwagger } from "./src/config/swagger.js";
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 const app = express();
 
 // Connect to database
 connectDB();
+
+// Create a write stream (in append mode) for logs
+const accessLogStream = fs.createWriteStream(path.join(__dirname, "logs/server.log"), {
+  flags: "a"
+});
 
 app.use(
   cors({
@@ -21,7 +32,10 @@ app.use(
   })
 );
 app.use(helmet());
+// Log to console
 app.use(morgan(config.LOG_FORMAT));
+// Log to file
+app.use(morgan("combined", { stream: accessLogStream }));
 app.use(express.json({ limit: config.BODY_LIMIT }));
 app.use(express.urlencoded({ extended: true }));
 
