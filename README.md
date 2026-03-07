@@ -48,6 +48,8 @@ To see the role-based differences in the dashboard, please use the following see
 Once the server is running, you can access the interactive Swagger UI at:
 [http://localhost:4002/api-docs](http://localhost:4002/api-docs)
 
+A **Postman Collection** is also included in the repository: [Task_Manager_API.json](Task_Manager_API.json). You can import this file into Postman to test the APIs.
+
 ## ⚙️ Installation
 
 1. **Clone the repository**:
